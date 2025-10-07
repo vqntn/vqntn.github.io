@@ -1,86 +1,284 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" class="scroll-smooth">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Valentina Quintana — Data Analyst</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-white text-slate-800 font-sans">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Career Portfolio</title>
+  <meta name="description" content="Portafolio de Data Analyst: proyectos en SQL, Python, Power BI y Tableau. ETL, visualización y ciencia de datos." />
+  <meta name="author" content="Valentina Quintana" />
+  <!-- Open Graph -->
+  <meta property="og:title" content="Valentina Quintana — Data Analyst" />
+  <meta property="og:description" content="Proyectos en SQL, Python, Power BI y Tableau." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="/assets/og-cover.png" />
+  <meta property="og:url" content="https://<TU_USUARIO>.github.io/" />
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Valentina Quintana — Data Analyst" />
+  <meta name="twitter:description" content="Proyectos en SQL, Python, Power BI y Tableau." />
+  <meta name="twitter:image" content="/assets/og-cover.png" />
 
-  <!-- Header -->
-  <header class="p-4 border-b border-slate-200 flex justify-between items-center">
-    <h1 class="text-xl font-semibold">Valentina Quintana</h1>
-    <nav class="space-x-4 text-sm">
-      <a href="#projects" class="hover:text-blue-600">Proyectos</a>
-      <a href="#skills" class="hover:text-blue-600">Habilidades</a>
-      <a href="#about" class="hover:text-blue-600">Sobre mí</a>
-      <a href="#contact" class="hover:text-blue-600">Contacto</a>
-    </nav>
+  <!-- Tailwind via CDN (simple para GitHub Pages). Para producción pesada, compila Tailwind. -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ["Inter", "system-ui", "-apple-system", "Segoe UI", "Roboto", "Ubuntu", "Cantarell", "Noto Sans", "Helvetica Neue", "Arial", "sans-serif"] },
+          colors: {
+            primary: {
+              50: '#eef2ff', 100: '#e0e7ff', 200: '#c7d2fe', 300: '#a5b4fc', 400: '#818cf8', 500: '#6366f1', 600: '#4f46e5', 700: '#4338ca', 800: '#3730a3', 900: '#312e81'
+            }
+          }
+        }
+      },
+      darkMode: 'class'
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="icon" href="/assets/favicon.png" />
+
+  <!-- JSON-LD: Person + WebSite -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Person",
+    "name":"Valentina Quintana",
+    "jobTitle":"Data Analyst",
+    "url":"https://<TU_USUARIO>.github.io/",
+    "sameAs":[
+      "https://www.linkedin.com/in/<tu-linkedin>",
+      "https://github.com/<TU_USUARIO>"
+    ],
+    "knowsAbout":["SQL","Python","Power BI","Tableau","ETL","Big Data"]
+  }
+  </script>
+</head>
+<body class="bg-white text-slate-800 dark:bg-slate-950 dark:text-slate-100 font-sans">
+  <!-- Header / Navbar -->
+  <header class="sticky top-0 z-40 backdrop-blur supports-[backdrop-filter]:bg-white/60 dark:supports-[backdrop-filter]:bg-slate-900/60 border-b border-slate-200 dark:border-slate-800">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex h-16 items-center justify-between">
+        <a href="#home" class="flex items-center gap-2 font-semibold">
+          <span class="inline-flex h-8 w-8 items-center justify-center rounded-xl bg-primary-600 text-white">VQ</span>
+          <span class="hidden sm:inline">Valentina Quintana</span>
+        </a>
+        <nav class="hidden md:flex items-center gap-6">
+          <a class="hover:text-primary-600" href="#home">Home</a>
+          <a class="hover:text-primary-600" href="#about">About</a>
+          <a class="hover:text-primary-600" href="#certificates">Certificates</a>
+          <a class="hover:text-primary-600" href="#projects">Projects</a>
+          <a class="hover:text-primary-600" href="#contact">Contact</a>
+          <button id="themeToggle" class="ml-2 rounded-xl border border-slate-200 dark:border-slate-700 px-3 py-1 text-sm">Mode</button>
+        </nav>
+        <!-- Mobile menu button -->
+        <button id="menuBtn" class="md:hidden inline-flex items-center justify-center rounded-xl border border-slate-200 dark:border-slate-700 p-2" aria-label="Abrir menú">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+      </div>
+    </div>
+    <!-- Mobile menu panel -->
+    <div id="mobileMenu" class="md:hidden hidden border-t border-slate-200 dark:border-slate-800">
+      <div class="px-4 py-3 flex flex-col gap-3">
+        <a class="hover:text-primary-600" href="#home" onclick="closeMenu()">Home</a>
+        <a class="hover:text-primary-600" href="#about" onclick="closeMenu()">About</a>
+        <a class="hover:text-primary-600" href="#certificates" onclick="closeMenu()">Certificates</a>
+        <a class="hover:text-primary-600" href="#projects" onclick="closeMenu()">Projects</a>
+        <a class="hover:text-primary-600" href="#contact" onclick="closeMenu()">Contact</a>
+        <button id="themeToggleMobile" class="mt-1 w-fit rounded-xl border border-slate-200 dark:border-slate-700 px-3 py-1 text-sm">Mode</button>
+      </div>
+    </div>
+    </div>
   </header>
 
   <!-- Hero -->
-  <section id="home" class="text-center py-16 px-6 bg-gradient-to-b from-blue-50 to-white">
-    <h2 class="text-3xl font-bold mb-4">Data Analyst enfocada en insights accionables</h2>
-    <p class="text-slate-600 max-w-xl mx-auto">
-      SQL, Python, Power BI y Tableau. Experiencia en ETL, visualización y storytelling con datos.
-    </p>
-    <a href="#projects" class="mt-6 inline-block bg-blue-600 text-white px-4 py-2 rounded-lg">Ver proyectos</a>
+  <section id="home" class="relative overflow-hidden">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-28">
+      <div class="text-center">
+        <h1 class="text-4xl sm:text-5xl font-bold leading-tight">Valentina Quintana</h1>
+        <p class="mt-4 text-xl sm:text-2xl text-slate-600 dark:text-slate-300">Data Scientist</p>
+        <p class="mt-6 max-w-2xl mx-auto text-base sm:text-lg text-slate-600 dark:text-slate-300">I build data products, dashboards and reproducible ETL pipelines. Skilled in SQL, Python and BI tools. Browse my projects and certificates below.</p>
+        <div class="mt-8 flex items-center justify-center gap-4">
+          <a href="#projects" class="inline-flex items-center justify-center rounded-xl bg-primary-600 px-5 py-3 text-white font-medium">View Projects</a>
+          <a href="#contact" class="inline-flex items-center justify-center rounded-xl border border-slate-300 dark:border-slate-700 px-5 py-3 font-medium">Contact</a>
+        </div>
+      </div>
+    </div>
   </section>
 
   <!-- Projects -->
-  <section id="projects" class="py-12 px-6">
-    <h3 class="text-2xl font-semibold text-center mb-6">Proyectos</h3>
-    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-      <div class="border p-4 rounded-xl shadow-sm hover:shadow-md">
-        <h4 class="font-medium">Turismo en Chile vs Dólar</h4>
-        <p class="text-sm text-slate-600">Análisis correlacional y dashboard sobre el impacto del tipo de cambio en el turismo.</p>
+  <section id="certificates" class="py-14 sm:py-16 border-t border-slate-100 dark:border-slate-800">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-2xl sm:text-3xl font-semibold">Certificates</h2>
+      <p class="mt-3 text-slate-700 dark:text-slate-300">Professional and online certifications relevant to data science and analytics.</p>
+      <ul class="mt-6 space-y-3 text-sm">
+        <li class="border rounded-xl p-3">Big Data Certification — In progress</li>
+        <li class="border rounded-xl p-3">Power BI Data Analyst (certificate placeholder)</li>
+        <li class="border rounded-xl p-3">SQL & Data Analysis (certificate placeholder)</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <section id="projects" class="py-14 sm:py-16 border-t border-slate-100 dark:border-slate-800">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-end justify-between gap-4 flex-wrap">
+        <div>
+          <h2 class="text-2xl sm:text-3xl font-semibold">Projects</h2>
+          <p class="mt-2 text-slate-600 dark:text-slate-300">Filter by stack or theme. 100% responsive.</p>
+        </div>
+        <div class="flex gap-2 text-sm">
+          <button class="filter-btn rounded-xl border px-3 py-1" data-filter="all">All</button>
+          <button class="filter-btn rounded-xl border px-3 py-1" data-filter="python">Python</button>
+          <button class="filter-btn rounded-xl border px-3 py-1" data-filter="sql">SQL</button>
+          <button class="filter-btn rounded-xl border px-3 py-1" data-filter="bi">Power BI / Tableau</button>
+          <button class="filter-btn rounded-xl border px-3 py-1" data-filter="etl">ETL</button>
+        </div>
       </div>
-      <div class="border p-4 rounded-xl shadow-sm hover:shadow-md">
-        <h4 class="font-medium">ETL Google Places → BigQuery</h4>
-        <p class="text-sm text-slate-600">Pipeline reproducible para extracción masiva y limpieza de datos.</p>
+
+      <!-- Grid -->
+      <div id="projectsGrid" class="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- keep existing project cards -->
       </div>
     </div>
   </section>
 
   <!-- Skills -->
-  <section id="skills" class="py-12 px-6 bg-slate-50">
-    <h3 class="text-2xl font-semibold text-center mb-6">Habilidades</h3>
-    <ul class="flex flex-wrap justify-center gap-3 text-sm">
-      <li class="border px-3 py-1 rounded-xl">SQL</li>
-      <li class="border px-3 py-1 rounded-xl">Python</li>
-      <li class="border px-3 py-1 rounded-xl">Power BI</li>
-      <li class="border px-3 py-1 rounded-xl">Tableau</li>
-      <li class="border px-3 py-1 rounded-xl">ETL</li>
-    </ul>
+  <section id="about" class="py-14 sm:py-16 border-t border-slate-100 dark:border-slate-800">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-2xl sm:text-3xl font-semibold">About</h2>
+      <div class="mt-4 grid md:grid-cols-3 gap-6">
+        <div class="md:col-span-2 text-slate-700 dark:text-slate-300">
+          <p class="font-semibold">Name</p>
+          <p class="mt-1">Valentina Quintana</p>
+          <p class="mt-4 font-semibold">About</p>
+          <p class="mt-1">I am an Industrial Civil Engineer and Data Scientist passionate about turning data into decisions. I focus on reproducible ETL pipelines, exploratory data analysis, and actionable dashboards for stakeholders.</p>
+          <p class="mt-4 font-semibold">Programming languages</p>
+          <p class="mt-1">Python (Pandas, NumPy, scikit-learn), SQL, Bash</p>
+          <p class="mt-4 font-semibold">Technical skills</p>
+          <p class="mt-1">Power BI (DAX), Tableau, BigQuery, ETL (Airbyte, dbt), Git & GitHub, Data storytelling, Statistics</p>
+        </div>
+        <div class="md:col-span-1">
+          <div class="rounded-2xl border border-slate-200 dark:border-slate-800 p-4 text-sm">
+            <p class="font-semibold">Highlights</p>
+            <ul class="mt-2 list-disc list-inside space-y-1 text-slate-700 dark:text-slate-300">
+              <li>Projects with real data (Kaggle, APIs, Open Data)</li>
+              <li>Best practices: reproducibility, README, licenses</li>
+              <li>Mobile-first and web performance</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
   </section>
 
   <!-- About -->
-  <section id="about" class="py-12 px-6">
-    <h3 class="text-2xl font-semibold text-center mb-6">Sobre mí</h3>
-    <p class="max-w-2xl mx-auto text-center text-slate-700">
-      Ingeniera Civil Industrial y Analista de Datos apasionada por transformar datos en decisiones.
-      Me motiva construir soluciones eficientes, visuales y útiles para equipos multidisciplinarios.
-    </p>
+  <section id="about" class="py-14 sm:py-16 border-t border-slate-100 dark:border-slate-800">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-2xl sm:text-3xl font-semibold">About</h2>
+      <div class="mt-4 grid md:grid-cols-3 gap-6">
+        <div class="md:col-span-2 text-slate-700 dark:text-slate-300">
+          <p class="font-semibold">Name</p>
+          <p class="mt-1">Valentina Quintana</p>
+          <p class="mt-4 font-semibold">About</p>
+          <p class="mt-1">I am an Industrial Civil Engineer and Data Scientist passionate about turning data into decisions. I focus on reproducible ETL pipelines, exploratory data analysis, and actionable dashboards for stakeholders.</p>
+          <p class="mt-4 font-semibold">Programming languages</p>
+          <p class="mt-1">Python (Pandas, NumPy, scikit-learn), SQL, Bash</p>
+          <p class="mt-4 font-semibold">Technical skills</p>
+          <p class="mt-1">Power BI (DAX), Tableau, BigQuery, ETL (Airbyte, dbt), Git & GitHub, Data storytelling, Statistics</p>
+        </div>
+        <div class="md:col-span-1">
+          <div class="rounded-2xl border border-slate-200 dark:border-slate-800 p-4 text-sm">
+            <p class="font-semibold">Highlights</p>
+            <ul class="mt-2 list-disc list-inside space-y-1 text-slate-700 dark:text-slate-300">
+              <li>Projects with real data (Kaggle, APIs, Open Data)</li>
+              <li>Best practices: reproducibility, README, licenses</li>
+              <li>Mobile-first and web performance</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
   </section>
 
   <!-- Contact -->
-  <section id="contact" class="py-12 px-6 bg-slate-50 text-center">
-    <h3 class="text-2xl font-semibold mb-4">Contacto</h3>
-    <p>📧 <a href="mailto:valentina.quintana@email.com" class="text-blue-600 underline">valentina.quintana@email.com</a></p>
-    <p class="mt-2">
-      <a href="https://github.com/vqntn" class="underline text-blue-600">GitHub</a> |
-      <a href="https://www.linkedin.com/in/valentinaquintana" class="underline text-blue-600">LinkedIn</a>
-    </p>
+  <section id="contact" class="py-14 sm:py-16">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-2xl sm:text-3xl font-semibold">Contacto</h2>
+      <p class="mt-3 text-slate-700 dark:text-slate-300">¿Te interesa colaborar o conversar? Escríbeme:</p>
+      <div class="mt-4 flex flex-wrap items-center gap-3 text-sm">
+        <a class="inline-flex items-center gap-2 rounded-xl border border-slate-200 dark:border-slate-700 px-3 py-2" href="mailto:valentina.quintana@email.com">
+          <span>valentina.quintana@email.com</span>
+        </a>
+        <a class="inline-flex items-center gap-2 rounded-xl border border-slate-200 dark:border-slate-700 px-3 py-2" href="https://www.linkedin.com/in/<tu-linkedin>" target="_blank">LinkedIn</a>
+        <a class="inline-flex items-center gap-2 rounded-xl border border-slate-200 dark:border-slate-700 px-3 py-2" href="https://github.com/<TU_USUARIO>" target="_blank">GitHub</a>
+      </div>
+    </div>
   </section>
 
-  <footer class="py-4 border-t border-slate-200 text-center text-sm text-slate-500">
-    © <span id="year"></span> Valentina Quintana — Portafolio
+  <!-- Footer -->
+  <footer class="border-t border-slate-100 dark:border-slate-800 py-8">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-sm flex flex-col sm:flex-row items-center justify-between gap-3">
+      <p>© <span id="year"></span> Valentina Quintana.</p>
+      <div class="flex items-center gap-3">
+        <a href="#home" class="underline">Arriba</a>
+        <a href="/LICENSE" class="underline">Licencia</a>
+        <a href="/README" class="underline">README</a>
+      </div>
+    </div>
   </footer>
 
+  <!-- Scripts: filtros, menú, tema -->
   <script>
+    // Año footer
     document.getElementById('year').textContent = new Date().getFullYear();
-  </script>
 
+    // Menú móvil
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    function closeMenu(){ mobileMenu.classList.add('hidden'); }
+    menuBtn?.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+
+    // Dark / Light toggle con persistencia
+    const themeToggle = document.getElementById('themeToggle');
+    const themeToggleMobile = document.getElementById('themeToggleMobile');
+    const root = document.documentElement;
+    const storageKey = 'theme-preference';
+    function setTheme(mode){
+      if(mode==='dark'){ root.classList.add('dark'); localStorage.setItem(storageKey,'dark'); }
+      else { root.classList.remove('dark'); localStorage.setItem(storageKey,'light'); }
+    }
+    // Preferencia inicial
+    const stored = localStorage.getItem(storageKey);
+    if(stored){ setTheme(stored); }
+    else if(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches){ setTheme('dark'); }
+
+    themeToggle?.addEventListener('click', ()=>{
+      root.classList.contains('dark') ? setTheme('light') : setTheme('dark');
+    });
+    themeToggleMobile?.addEventListener('click', ()=>{
+      root.classList.contains('dark') ? setTheme('light') : setTheme('dark');
+    });
+
+    // Filtros de proyectos
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const cards = document.querySelectorAll('.project-card');
+    filterButtons.forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        const f = btn.dataset.filter;
+        cards.forEach(card=>{
+          const tags = card.dataset.tags.split(' ');
+          const show = f==='all' || tags.includes(f);
+          card.classList.toggle('hidden', !show);
+        });
+        filterButtons.forEach(b=>b.classList.remove('bg-primary-600','text-white'));
+        btn.classList.add('bg-primary-600','text-white');
+      });
+    });
+  </script>
 </body>
 </html>
