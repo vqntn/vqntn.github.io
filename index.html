@@ -1,105 +1,690 @@
-<!DOCTYPE HTML>
-<!-- Highlights Template adapted for Valentina Quintana -->
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>Career Portfolio | Valentina Quintana</title>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-    <link rel="stylesheet" href="assets/css/main.css" />
-    <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Valentina Quintana · Data Scientist</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    /* ── Reset & tokens ─────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:      #F7F5F0;
+      --bg2:     #EFECEA;
+      --ink:     #1A1916;
+      --ink2:    #5A5850;
+      --ink3:    #9A9890;
+      --accent:  #1A1916;
+      --rule:    #D8D6D0;
+      --serif:   'DM Serif Display', Georgia, serif;
+      --sans:    'DM Sans', system-ui, sans-serif;
+      --mono:    'DM Mono', 'Courier New', monospace;
+      --max:     860px;
+      --px:      clamp(1.25rem, 5vw, 3rem);
+    }
+
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      font-family: var(--sans);
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Nav ─────────────────────────────────────────────────── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.1rem var(--px);
+      background: var(--bg);
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.3s;
+    }
+    nav.scrolled { border-color: var(--rule); }
+    .nav-logo {
+      font-family: var(--serif);
+      font-size: 1.1rem;
+      color: var(--ink);
+      text-decoration: none;
+      letter-spacing: 0.01em;
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      font-size: 0.82rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--ink2);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--ink); }
+
+    /* ── Cover / Hero ───────────────────────────────────────── */
+    #cover {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 0 var(--px) clamp(3rem, 8vh, 5rem);
+      border-bottom: 1px solid var(--rule);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cover-grid {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: flex-end;
+      gap: 2rem;
+      max-width: var(--max);
+    }
+
+    .cover-label {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      color: var(--ink3);
+      text-transform: uppercase;
+      margin-bottom: 1.25rem;
+    }
+
+    .cover-name {
+      font-family: var(--serif);
+      font-size: clamp(3.2rem, 9vw, 7rem);
+      line-height: 0.95;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+    }
+    .cover-name em {
+      font-style: italic;
+      color: var(--ink2);
+    }
+
+    .cover-desc {
+      margin-top: 1.75rem;
+      font-size: 1rem;
+      color: var(--ink2);
+      max-width: 38ch;
+      line-height: 1.65;
+    }
+
+    .cover-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 2.25rem;
+      padding: 0.75rem 1.5rem;
+      background: var(--ink);
+      color: var(--bg);
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+    .cover-cta:hover { opacity: 0.8; }
+    .cover-cta svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 1.8; }
+
+    .cover-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      align-items: flex-end;
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: var(--ink3);
+      letter-spacing: 0.04em;
+      padding-bottom: 0.25rem;
+    }
+    .cover-meta a { color: var(--ink3); text-decoration: none; transition: color 0.2s; }
+    .cover-meta a:hover { color: var(--ink); }
+
+    /* Decorative rule top-right */
+    .cover-rule {
+      position: absolute;
+      top: 0; right: var(--px);
+      width: 1px;
+      height: 55%;
+      background: var(--rule);
+    }
+
+    /* ── Section base ────────────────────────────────────────── */
+    .section {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: clamp(3rem, 8vw, 5.5rem) var(--px);
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      margin-bottom: 2.75rem;
+    }
+    .section-num {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      color: var(--ink3);
+      letter-spacing: 0.08em;
+    }
+    .section-title {
+      font-family: var(--serif);
+      font-size: clamp(1.8rem, 4vw, 2.5rem);
+      line-height: 1.1;
+      letter-spacing: -0.01em;
+    }
+
+    /* ── About ───────────────────────────────────────────────── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 3fr 2fr;
+      gap: 3rem;
+      align-items: start;
+    }
+    .about-text p {
+      color: var(--ink2);
+      font-size: 1.05rem;
+      line-height: 1.75;
+      margin-bottom: 1.1rem;
+    }
+    .about-text p:last-child { margin-bottom: 0; }
+
+    .about-stack h4 {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink3);
+      margin-bottom: 1rem;
+    }
+    .stack-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .tag {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      padding: 0.3rem 0.7rem;
+      border: 1px solid var(--rule);
+      color: var(--ink2);
+      background: var(--bg2);
+      letter-spacing: 0.03em;
+    }
+    .tag:hover { border-color: var(--ink2); color: var(--ink); }
+
+    /* ── Certificates ────────────────────────────────────────── */
+    .cert-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .cert-item {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 1rem;
+      align-items: center;
+      padding: 1.5rem 0;
+      border-bottom: 1px solid var(--rule);
+    }
+    .cert-item:first-child { border-top: 1px solid var(--rule); }
+    .cert-name {
+      font-size: 1rem;
+      font-weight: 400;
+      color: var(--ink);
+    }
+    .cert-issuer {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: var(--ink3);
+      margin-top: 0.25rem;
+      letter-spacing: 0.04em;
+    }
+    .cert-year {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: var(--ink3);
+      text-align: right;
+    }
+
+    /* ── Projects ────────────────────────────────────────────── */
+    .projects-tabs {
+      display: flex;
+      gap: 0;
+      margin-bottom: 2.5rem;
+      border-bottom: 1px solid var(--rule);
+    }
+    .ptab {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 0.65rem 1.25rem;
+      border: none;
+      background: none;
+      color: var(--ink3);
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -1px;
+      transition: color 0.2s;
+    }
+    .ptab:hover { color: var(--ink2); }
+    .ptab.active {
+      color: var(--ink);
+      border-bottom-color: var(--ink);
+    }
+
+    .projects-panel { display: none; }
+    .projects-panel.active { display: block; }
+
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .project-card {
+      border: 1px solid var(--rule);
+      background: var(--bg);
+      padding: 1.5rem;
+      transition: border-color 0.2s, transform 0.2s;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+    .project-card:hover {
+      border-color: var(--ink2);
+      transform: translateY(-2px);
+    }
+
+    .project-type {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink3);
+      margin-bottom: 0.85rem;
+    }
+    .project-title {
+      font-size: 1.05rem;
+      font-weight: 500;
+      color: var(--ink);
+      line-height: 1.3;
+      margin-bottom: 0.6rem;
+    }
+    .project-desc {
+      font-size: 0.88rem;
+      color: var(--ink2);
+      line-height: 1.6;
+      margin-bottom: 1.1rem;
+    }
+    .project-footer {
+      display: flex;
+      gap: 0.4rem;
+      flex-wrap: wrap;
+      border-top: 1px solid var(--rule);
+      padding-top: 0.85rem;
+      margin-top: auto;
+    }
+    .project-tag {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.04em;
+      color: var(--ink3);
+      background: var(--bg2);
+      padding: 0.2rem 0.55rem;
+    }
+
+    /* Empty state */
+    .empty-state {
+      grid-column: 1/-1;
+      padding: 3rem 0;
+      text-align: center;
+    }
+    .empty-state-icon {
+      font-family: var(--mono);
+      font-size: 2rem;
+      color: var(--rule);
+      margin-bottom: 1rem;
+    }
+    .empty-state p {
+      font-size: 0.9rem;
+      color: var(--ink3);
+      font-family: var(--mono);
+    }
+    .empty-state a {
+      color: var(--ink2);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    /* ── Contact ─────────────────────────────────────────────── */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: start;
+    }
+    .contact-headline {
+      font-family: var(--serif);
+      font-size: clamp(1.4rem, 3vw, 2rem);
+      line-height: 1.2;
+      color: var(--ink);
+      margin-bottom: 1rem;
+    }
+    .contact-body {
+      font-size: 0.95rem;
+      color: var(--ink2);
+      line-height: 1.7;
+    }
+    .contact-links {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .contact-link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.1rem 0;
+      border-bottom: 1px solid var(--rule);
+      text-decoration: none;
+      color: var(--ink2);
+      font-size: 0.95rem;
+      transition: color 0.2s;
+    }
+    .contact-link:first-child { border-top: 1px solid var(--rule); }
+    .contact-link:hover { color: var(--ink); }
+    .contact-link-label {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink3);
+    }
+    .contact-link-arrow {
+      font-size: 1rem;
+      transition: transform 0.2s;
+    }
+    .contact-link:hover .contact-link-arrow { transform: translateX(4px); }
+
+    /* ── Footer ──────────────────────────────────────────────── */
+    footer {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 2rem var(--px);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    footer p {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      color: var(--ink3);
+      letter-spacing: 0.04em;
+    }
+
+    /* ── Animations ──────────────────────────────────────────── */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: none;
+    }
+    .fade-in:nth-child(2) { transition-delay: 0.08s; }
+    .fade-in:nth-child(3) { transition-delay: 0.16s; }
+    .fade-in:nth-child(4) { transition-delay: 0.24s; }
+
+    /* ── Responsive ──────────────────────────────────────────── */
+    @media (max-width: 640px) {
+      .cover-grid { grid-template-columns: 1fr; }
+      .cover-meta { align-items: flex-start; flex-direction: row; flex-wrap: wrap; }
+      .about-grid { grid-template-columns: 1fr; }
+      .contact-grid { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+    }
+  </style>
 </head>
+<body>
 
-<body class="is-preload">
+  <!-- Nav -->
+  <nav id="nav">
+    <a href="#cover" class="nav-logo">VQ</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#certificates">Certificates</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
 
-    <!-- Header -->
-    <section id="header">
-        <header class="major">
-            <h1>Valentina Quintana</h1>
-            <p>Data Scientist — Transforming data into actionable insights</p>
-        </header>
-        <div class="container">
-            <ul class="actions special">
-                <li><a href="#about" class="button primary scrolly">Get Started</a></li>
-            </ul>
+  <!-- Cover -->
+  <section id="cover">
+    <div class="cover-rule" aria-hidden="true"></div>
+    <div class="cover-grid">
+      <div>
+        <p class="cover-label">Portfolio · Data Science</p>
+        <h1 class="cover-name">Valentina<br><em>Quintana</em></h1>
+        <p class="cover-desc">
+          Industrial Civil Engineer turned data scientist. I transform raw data into clear analysis, useful visualizations, and reproducible code.
+        </p>
+        <a href="#about" class="cover-cta">
+          View work
+          <svg viewBox="0 0 14 14" aria-hidden="true"><path d="M1 7h12M8 2l5 5-5 5"/></svg>
+        </a>
+      </div>
+      <div class="cover-meta">
+        <a href="https://github.com/vqntn" target="_blank" rel="noopener">GitHub ↗</a>
+        <a href="https://www.linkedin.com/in/vquintanao/" target="_blank" rel="noopener">LinkedIn ↗</a>
+        <span>Concepción, Chile</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about" class="section">
+    <div class="section-header">
+      <span class="section-num">01</span>
+      <h2 class="section-title">About</h2>
+    </div>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>
+          I have a background in <strong>Industrial Civil Engineering</strong> and a growing focus on data science, big data, and analytics. I'm drawn to the full pipeline — from raw data and SQL queries to visual dashboards and machine learning models.
+        </p>
+        <p>
+          My experience includes working with large-scale mobility datasets, building analysis pipelines in Python, and creating dashboards in Power BI and Tableau. I enjoy projects where the technical rigor and the clarity of the final output both matter.
+        </p>
+        <p>
+          I'm currently building my project portfolio through self-directed research and coursework, focusing on real datasets and reproducible workflows.
+        </p>
+      </div>
+      <div class="about-stack">
+        <h4>Tools &amp; Technologies</h4>
+        <div class="stack-tags">
+          <span class="tag">Python</span>
+          <span class="tag">SQL</span>
+          <span class="tag">Power BI</span>
+          <span class="tag">Tableau</span>
+          <span class="tag">Pandas</span>
+          <span class="tag">NumPy</span>
+          <span class="tag">Scikit-learn</span>
+          <span class="tag">Matplotlib</span>
+          <span class="tag">Plotly</span>
+          <span class="tag">Git</span>
+          <span class="tag">Jupyter</span>
+          <span class="tag">APIs REST</span>
         </div>
-    </section>
+      </div>
+    </div>
+  </section>
 
-    <!-- About -->
-    <section id="about" class="main special">
-        <div class="container">
-            <header class="major">
-                <h2>About</h2>
-            </header>
-            <p>
-                Curious mind with a background in <strong>Industrial Civil Engineering</strong>, driven by data and inspired by innovation. 
-                Passionate about discovering insights through analytics, programming, and data visualization to drive smarter decisions.
-            </p>
+  <!-- Certificates -->
+  <section id="certificates" class="section">
+    <div class="section-header">
+      <span class="section-num">02</span>
+      <h2 class="section-title">Certificates</h2>
+    </div>
+    <div class="cert-list">
+      <div class="cert-item fade-in">
+        <div>
+          <div class="cert-name">Big Data</div>
+          <div class="cert-issuer">Samsung Innovation Campus</div>
         </div>
-    </section>
-
-    <!-- Certificates -->
-    <section id="certificates" class="main special">
-        <div class="container">
-            <header class="major">
-                <h2>Certificates</h2>
-            </header>
-            <ul class="features">
-                <li>
-                    <h3>Big Data</h3>
-                    <p>Samsung Innovation Campus</p>
-                </li>
-                <li>
-                    <h3>Data Science Specialization Course</h3>
-                    <p>Talento Digital para Chile</p>
-                </li>
-            </ul>
+        <div class="cert-year">2024</div>
+      </div>
+      <div class="cert-item fade-in">
+        <div>
+          <div class="cert-name">Data Science Specialization</div>
+          <div class="cert-issuer">Talento Digital para Chile</div>
         </div>
-    </section>
+        <div class="cert-year">2024</div>
+      </div>
+    </div>
+  </section>
 
-    <!-- Projects -->
-    <section id="projects" class="main special">
-        <div class="container">
-            <header class="major">
-                <h2>Projects</h2>
-            </header>
-            <p>
-                Coming soon: A showcase of projects demonstrating my work in data analysis, visualization, and modeling.
-            </p>
+  <!-- Projects -->
+  <section id="projects" class="section">
+    <div class="section-header">
+      <span class="section-num">03</span>
+      <h2 class="section-title">Projects</h2>
+    </div>
+
+    <div class="projects-tabs">
+      <button class="ptab active" onclick="showTab('python', this)">Python</button>
+      <button class="ptab" onclick="showTab('sql', this)">SQL</button>
+      <button class="ptab" onclick="showTab('ml', this)">Machine Learning</button>
+    </div>
+
+    <!-- Python -->
+    <div id="tab-python" class="projects-panel active">
+      <div class="project-grid">
+
+        <!-- ✦ ADD YOUR PYTHON PROJECTS BELOW — duplicate a .project-card block -->
+        <!--
+        <a href="https://github.com/vqntn/YOUR-REPO" target="_blank" rel="noopener" class="project-card">
+          <div class="project-type">Python · EDA</div>
+          <div class="project-title">Your Project Title</div>
+          <div class="project-desc">Short description of what this project does and what you found.</div>
+          <div class="project-footer">
+            <span class="project-tag">Pandas</span>
+            <span class="project-tag">Matplotlib</span>
+          </div>
+        </a>
+        -->
+
+        <div class="empty-state">
+          <div class="empty-state-icon">{ }</div>
+          <p>Projects coming soon.<br>
+          See <a href="https://github.com/vqntn" target="_blank" rel="noopener">github.com/vqntn</a> for work in progress.</p>
         </div>
-    </section>
 
-    <!-- Contact -->
-    <section id="contact" class="main special">
-        <div class="container">
-            <header class="major">
-                <h2>Contact</h2>
-            </header>
-            <ul class="icons">
-                <li><a href="https://github.com/vqntn" class="icon brands fa-github alt"><span class="label">GitHub</span></a></li>
-                <li><a href="https://www.linkedin.com/in/vquintanao/" class="icon brands fa-linkedin alt"><span class="label">LinkedIn</span></a></li>
-                <li><a href="mailto:quintanaortizv@gmail.com" class="icon solid fa-envelope alt"><span class="label">Email</span></a></li>
-            </ul>
-            <p>Let's connect — I'm always open to collaborations and new ideas.</p>
+      </div>
+    </div>
+
+    <!-- SQL -->
+    <div id="tab-sql" class="projects-panel">
+      <div class="project-grid">
+
+        <!-- ✦ ADD YOUR SQL PROJECTS BELOW -->
+
+        <div class="empty-state">
+          <div class="empty-state-icon">{ }</div>
+          <p>SQL projects coming soon.</p>
         </div>
-    </section>
 
-    <!-- Footer -->
-    <section id="footer">
-        <ul class="copyright">
-            <li>&copy; 2025 Valentina Quintana</li>
-            <li>Design: <a href="https://html5up.net">HTML5 UP</a></li>
-        </ul>
-    </section>
+      </div>
+    </div>
 
-    <!-- Scripts -->
-    <script src="assets/js/jquery.min.js"></script>
-    <script src="assets/js/jquery.scrollex.min.js"></script>
-    <script src="assets/js/jquery.scrolly.min.js"></script>
-    <script src="assets/js/browser.min.js"></script>
-    <script src="assets/js/breakpoints.min.js"></script>
-    <script src="assets/js/util.js"></script>
-    <script src="assets/js/main.js"></script>
+    <!-- Machine Learning -->
+    <div id="tab-ml" class="projects-panel">
+      <div class="project-grid">
 
+        <!-- ✦ ADD YOUR ML PROJECTS BELOW -->
+
+        <div class="empty-state">
+          <div class="empty-state-icon">{ }</div>
+          <p>Machine learning projects coming soon.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="section">
+    <div class="section-header">
+      <span class="section-num">04</span>
+      <h2 class="section-title">Contact</h2>
+    </div>
+    <div class="contact-grid">
+      <div>
+        <p class="contact-headline">Open to opportunities and collaborations.</p>
+        <p class="contact-body">
+          I'm looking for roles in data analysis, data science, or BI — and always interested in interesting datasets and research questions. Feel free to reach out.
+        </p>
+      </div>
+      <div class="contact-links">
+        <a href="mailto:quintanaortizv@gmail.com" class="contact-link">
+          <div>
+            <div class="contact-link-label">Email</div>
+            <div>quintanaortizv@gmail.com</div>
+          </div>
+          <span class="contact-link-arrow">→</span>
+        </a>
+        <a href="https://www.linkedin.com/in/vquintanao/" target="_blank" rel="noopener" class="contact-link">
+          <div>
+            <div class="contact-link-label">LinkedIn</div>
+            <div>vquintanao</div>
+          </div>
+          <span class="contact-link-arrow">→</span>
+        </a>
+        <a href="https://github.com/vqntn" target="_blank" rel="noopener" class="contact-link">
+          <div>
+            <div class="contact-link-label">GitHub</div>
+            <div>vqntn</div>
+          </div>
+          <span class="contact-link-arrow">→</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 Valentina Quintana</p>
+    <p>Built with HTML · Hosted on GitHub Pages</p>
+  </footer>
+
+  <script>
+    // Nav shadow on scroll
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 40);
+    }, { passive: true });
+
+    // Project tabs
+    function showTab(id, btn) {
+      document.querySelectorAll('.projects-panel').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('.ptab').forEach(b => b.classList.remove('active'));
+      document.getElementById('tab-' + id).classList.add('active');
+      btn.classList.add('active');
+    }
+
+    // Fade-in on scroll
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+  </script>
 </body>
 </html>
-
